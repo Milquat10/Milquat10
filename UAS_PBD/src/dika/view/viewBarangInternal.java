@@ -1,0 +1,565 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dika.view;
+
+import com.mysql.jdbc.Statement;
+import dika.controller.controllerBarang;
+import dika.db.KoneksiDatabase;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author 10 Pro
+ */
+public class viewBarangInternal extends javax.swing.JInternalFrame {
+    private controllerBarang cB;
+    /**
+     * Creates new form viewBarangInternal
+     */
+    private DefaultTableModel model;
+    
+    public viewBarangInternal() {
+        initComponents();
+        
+        cB = new controllerBarang(this);
+        model = new DefaultTableModel();
+         tabelBarang.setModel(model);
+         model.addColumn("ID");
+         model.addColumn("NAMA");
+         model.addColumn("STOK");
+         model.addColumn("PRODUKSI");
+         model.addColumn("KADALUARSA");
+         model.addColumn("KOTOR");
+         model.addColumn("BAHAN");
+         model.addColumn("LAIN");
+         model.addColumn("BERSIH");
+         
+         
+         
+         tampilDataBarang();
+         cB.KontrolButton();
+    }
+    
+    public JTextField getIdBarangView(){
+        return idBarang;
+    }
+    
+    public JTextField getNamaBarangView(){
+        return namaBarang;
+    }
+    
+    public JTextField getStokView(){
+        return stok;
+    }
+    
+    public JTextField getProduksiView(){
+        return produksi;
+    }
+    
+    public JTextField getKadaluarsaView(){
+        return kadaluarsa;
+    }
+    
+    public JTextField getlabaKotorView(){
+        return labaKotor;
+    }
+    
+    public JTextField getbiayaBahanView(){
+    return biayaBahan;
+    }
+    
+    public JTextField getbiayaLainView(){
+    return biayaLain;
+    }
+    
+    public JTextField getlabaBersihView(){
+        return labaBersih;
+    }
+    
+    
+    public JButton getTombolSimpan(){
+        return tombolSimpan;
+    }
+    
+    public JButton getTombolHapus(){
+        return tombolHapus;
+    }
+    
+    public JButton getTombolEdit(){
+        return tombolUbah;
+    }
+    
+    public JButton getTombolBatal(){
+        return tombolBatal;
+    }
+    
+    private void tampilDataBarang(){
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        String sql = "SELECT * FROM barang";
+        
+        try {
+            Statement stat = (Statement) KoneksiDatabase.getKoneksi().createStatement();
+            ResultSet res = stat.executeQuery(sql);
+            
+            while(res.next()){
+                Object[] hasil;
+                hasil = new Object[9];
+                hasil[0] = res.getString("idBarang");
+                hasil[1] = res.getString("namaBarang");
+                hasil[2] = res.getString("stok");
+                hasil[3] = res.getString("produksi");
+                hasil[4] = res.getString("kadaluarsa");
+                hasil[5] = res.getString("labaKotor");
+                hasil[6] = res.getString("biayaBahan");
+                hasil[7] = res.getString("biayaLain");
+                hasil[8] = res.getString("labaBersih");
+                
+                model.addRow(hasil);
+                
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(viewBarangInternal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void ambilDataTabel(){
+        
+        int index = tabelBarang.getSelectedRow();
+        
+        String id = String.valueOf(tabelBarang.getValueAt(index, 0));
+        String nama = String.valueOf(tabelBarang.getValueAt(index, 1));
+        String jenis = String.valueOf(tabelBarang.getValueAt(index, 2));
+        String sat = String.valueOf(tabelBarang.getValueAt(index, 3));
+        String ukur = String.valueOf(tabelBarang.getValueAt(index, 4));
+        String har = String.valueOf(tabelBarang.getValueAt(index, 5));
+        String bhn = String.valueOf(tabelBarang.getValueAt(index, 6));
+        String lny = String.valueOf(tabelBarang.getValueAt(index, 7));
+         String brs = String.valueOf(tabelBarang.getValueAt(index, 8));
+         
+        idBarang.setText(id);
+        namaBarang.setText(nama);
+        stok.setText(jenis);
+        produksi.setText(sat);
+        kadaluarsa.setText(ukur);
+        labaKotor.setText(har);
+        biayaBahan.setText(bhn);
+        biayaLain.setText(lny);
+        labaBersih.setText(brs);
+        
+        cB.KontrolButtonDua();
+    }
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tombolSimpan = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        produksi = new javax.swing.JTextField();
+        kadaluarsa = new javax.swing.JTextField();
+        labaKotor = new javax.swing.JTextField();
+        namaBarang = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        idBarang = new javax.swing.JTextField();
+        tombolUbah = new javax.swing.JButton();
+        tombolHapus = new javax.swing.JButton();
+        tombolBatal = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelBarang = new javax.swing.JTable();
+        stok = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        biayaBahan = new javax.swing.JTextField();
+        biayaLain = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        labaBersih = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        tombolHitung = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        setBackground(new java.awt.Color(204, 204, 204));
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Modul Barang");
+
+        jLabel1.setText("Produksi");
+
+        jLabel2.setText("Kadaluarsa");
+
+        tombolSimpan.setText("SIMPAN");
+        tombolSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tombolSimpanMouseClicked(evt);
+            }
+        });
+        tombolSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolSimpanActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Laba Kotor");
+
+        produksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                produksiActionPerformed(evt);
+            }
+        });
+
+        kadaluarsa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kadaluarsaActionPerformed(evt);
+            }
+        });
+
+        labaKotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labaKotorActionPerformed(evt);
+            }
+        });
+
+        namaBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaBarangActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Nama Barang");
+
+        jLabel7.setText("Id Barang");
+
+        idBarang.setEnabled(false);
+        idBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idBarangActionPerformed(evt);
+            }
+        });
+
+        tombolUbah.setText("UBAH");
+        tombolUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolUbahActionPerformed(evt);
+            }
+        });
+
+        tombolHapus.setText("HAPUS");
+        tombolHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolHapusActionPerformed(evt);
+            }
+        });
+
+        tombolBatal.setText("BATAL");
+        tombolBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolBatalActionPerformed(evt);
+            }
+        });
+
+        tabelBarang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabelBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelBarangMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tabelBarang);
+
+        jLabel3.setText("Stok");
+
+        biayaBahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                biayaBahanActionPerformed(evt);
+            }
+        });
+
+        biayaLain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                biayaLainActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Biaya Bahan");
+
+        jLabel8.setText("Biaya Lain");
+
+        labaBersih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labaBersihActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Laba Bersih");
+
+        tombolHitung.setText("Hitung");
+        tombolHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolHitungActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tombolBatal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(tombolHapus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tombolUbah)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tombolSimpan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(stok)
+                            .addComponent(produksi)
+                            .addComponent(kadaluarsa)
+                            .addComponent(labaKotor)
+                            .addComponent(namaBarang)
+                            .addComponent(idBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(biayaBahan, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(biayaLain)
+                            .addComponent(labaBersih))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tombolHitung)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(idBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(namaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(produksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(kadaluarsa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(labaKotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(67, 67, 67)
+                                        .addComponent(jLabel2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(biayaBahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(biayaLain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labaBersih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tombolSimpan)
+                    .addComponent(tombolUbah)
+                    .addComponent(tombolHapus)
+                    .addComponent(tombolBatal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tombolHitung)
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void tombolSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSimpanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tombolSimpanActionPerformed
+
+    private void produksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produksiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_produksiActionPerformed
+
+    private void kadaluarsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kadaluarsaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kadaluarsaActionPerformed
+
+    private void labaKotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labaKotorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_labaKotorActionPerformed
+
+    private void namaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaBarangActionPerformed
+
+    private void idBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idBarangActionPerformed
+
+    private void tombolSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolSimpanMouseClicked
+        // TODO add your handling code here:
+        cB.simpan();
+        tampilDataBarang();
+    }//GEN-LAST:event_tombolSimpanMouseClicked
+
+    private void tombolUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolUbahActionPerformed
+        // TODO add your handling code here:
+        cB.update();
+        tampilDataBarang();
+    }//GEN-LAST:event_tombolUbahActionPerformed
+
+    private void tombolHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHapusActionPerformed
+        // TODO add your handling code here:
+        cB.hapus();
+        tampilDataBarang();
+    }//GEN-LAST:event_tombolHapusActionPerformed
+
+    private void tombolBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolBatalActionPerformed
+        // TODO add your handling code here:
+        cB.KontrolButton();
+        cB.bersihkan();
+    }//GEN-LAST:event_tombolBatalActionPerformed
+
+    private void tabelBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelBarangMouseClicked
+        // TODO add your handling code here:
+        ambilDataTabel();
+    }//GEN-LAST:event_tabelBarangMouseClicked
+
+    private void biayaBahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaBahanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_biayaBahanActionPerformed
+
+    private void biayaLainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaLainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_biayaLainActionPerformed
+
+    private void labaBersihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labaBersihActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_labaBersihActionPerformed
+
+    private void tombolHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHitungActionPerformed
+        // TODO add your handling code here:
+       // Integer.parseInt(qty.getText()) * Integer.parseInt(hargaBarang.getText());
+       int lk;
+       int bb;
+       int bl;
+       int hasil;
+       lk = Integer.parseInt(labaKotor.getText());
+       bb = Integer.parseInt(biayaBahan.getText());
+       bl = Integer.parseInt(biayaLain.getText());
+       hasil = lk-bb-bl;
+       labaBersih.setText(String.valueOf(hasil));
+    }//GEN-LAST:event_tombolHitungActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField biayaBahan;
+    private javax.swing.JTextField biayaLain;
+    private javax.swing.JTextField idBarang;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField kadaluarsa;
+    private javax.swing.JTextField labaBersih;
+    private javax.swing.JTextField labaKotor;
+    private javax.swing.JTextField namaBarang;
+    private javax.swing.JTextField produksi;
+    private javax.swing.JTextField stok;
+    private javax.swing.JTable tabelBarang;
+    private javax.swing.JButton tombolBatal;
+    private javax.swing.JButton tombolHapus;
+    private javax.swing.JButton tombolHitung;
+    private javax.swing.JButton tombolSimpan;
+    private javax.swing.JButton tombolUbah;
+    // End of variables declaration//GEN-END:variables
+}
